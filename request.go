@@ -5,7 +5,7 @@ import (
 )
 
 type AlexaRequest struct {
-	Version string  `json:"version,omitempty"`
+	Version string  `json:"version"`
 	Session Session `json:"session"`
 	Context Context `json:"context"`
 	Request Request `json:"request"`
@@ -81,9 +81,9 @@ type Request struct {
 }
 
 type Intent struct {
-	Name               string `json:"name"`
-	ConfirmationStatus string `json:"confirmationStatus"`
-	Slots              []Slot `json:"slots"`
+	Name               string             `json:"name"`
+	ConfirmationStatus ConfirmationStatus `json:"confirmationStatus"`
+	Slots              []Slot             `json:"slots"`
 }
 
 type Slot struct {
@@ -93,33 +93,17 @@ type Slot struct {
 	Source             Source             `json:"source"`
 }
 
-type ConfirmationStatus int
+type ConfirmationStatus string
 
 const (
-	None ConfirmationStatus = 0
+	None ConfirmationStatus = "NONE"
 )
 
-func (c ConfirmationStatus) String() string {
-	types := [...]string{
-		"NONE",
-	}
-
-	return types[c]
-}
-
-type Source int
+type Source string
 
 const (
-	UserSource Source = 0
+	UserSource Source = "USER"
 )
-
-func (s Source) String() string {
-	types := [...]string{
-		"USER",
-	}
-
-	return types[s]
-}
 
 type RequestType int
 
