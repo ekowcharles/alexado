@@ -1,17 +1,17 @@
 package alexa
 
 type AlexaResponse struct {
-	Version           string     `json:"version,omitempty"`
-	SessionAttributes Attributes `json:"sessionAttributes,omitempty"`
-	Response          Response   `json:"response,omitempty"`
+	Version           string      `json:"version,omitempty"`
+	SessionAttributes *Attributes `json:"sessionAttributes,omitempty"`
+	Response          Response    `json:"response,omitempty"`
 }
 
 type Response struct {
-	OutputSpeech     OutputSpeech `json:"outputSpeech,omitempty"`
-	Card             Card         `json:"card,omitempty"`
-	Reprompt         Reprompt     `json:"reprompt,omitempty"`
-	Directives       []Directives `json:"directives,omitempty"`
-	ShouldEndSession bool         `json:"shouldEndSession,omitempty"`
+	OutputSpeech     *OutputSpeech `json:"outputSpeech,omitempty"`
+	Card             *Card         `json:"card,omitempty"`
+	Reprompt         *Reprompt     `json:"reprompt,omitempty"`
+	Directives       []Directives  `json:"directives,omitempty"`
+	ShouldEndSession bool          `json:"shouldEndSession,omitempty"`
 }
 
 type OutputSpeech struct {
@@ -39,7 +39,7 @@ type Card struct {
 	Type  string `json:"type,omitempty"`
 	Title string `json:"title,omitempty"`
 	Text  string `json:"text,omitempty"`
-	Image Image  `json:"image,omitempty"`
+	Image *Image `json:"image,omitempty"`
 }
 
 type Image struct {
