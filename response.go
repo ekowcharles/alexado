@@ -1,24 +1,24 @@
 package alexa
 
 type AlexaResponse struct {
-	Version           string     `json:"version"`
-	SessionAttributes Attributes `json:"sessionAttributes"`
-	Response          Response   `json:"response"`
+	Version           string     `json:"version,omitempty"`
+	SessionAttributes Attributes `json:"sessionAttributes,omitempty"`
+	Response          Response   `json:"response,omitempty"`
 }
 
 type Response struct {
-	OutputSpeech     OutputSpeech `json:"outputSpeech"`
-	Card             Card         `json:"card"`
-	Reprompt         Reprompt     `json:"reprompt"`
-	Directives       []Directive  `json:"directives"`
-	ShouldEndSession bool         `json:"shouldEndSession"`
+	OutputSpeech     OutputSpeech `json:"outputSpeech,omitempty"`
+	Card             Card         `json:"card,omitempty"`
+	Reprompt         Reprompt     `json:"reprompt,omitempty"`
+	Directives       []Directives `json:"directives,omitempty"`
+	ShouldEndSession bool         `json:"shouldEndSession,omitempty"`
 }
 
 type OutputSpeech struct {
-	Type         string `json:"type"`
-	Text         string `json:"text"`
-	SSML         string `json:"ssml"`
-	PlayBehavior string `json:"playBehavior"`
+	Type         string `json:"type,omitempty"`
+	Text         string `json:"text,omitempty"`
+	SSML         string `json:"ssml,omitempty"`
+	PlayBehavior string `json:"playBehavior,omitempty"`
 }
 
 type OutputSpeechType int
@@ -36,21 +36,21 @@ func (o OutputSpeechType) String() string {
 }
 
 type Card struct {
-	Type  string `json:"type"`
-	Title string `json:"title"`
-	Text  string `json:"text"`
-	Image Image  `json:"image"`
+	Type  string `json:"type,omitempty"`
+	Title string `json:"title,omitempty"`
+	Text  string `json:"text,omitempty"`
+	Image Image  `json:"image,omitempty"`
 }
 
 type Image struct {
-	SmallImageURL string `json:"smallImageUrl"`
-	LargeImageURL string `json:"largeImageUrl"`
+	SmallImageURL string `json:"smallImageUrl,omitempty"`
+	LargeImageURL string `json:"largeImageUrl,omitempty"`
 }
 
 type Reprompt struct {
-	OutputSpeech OutputSpeech `json:"outputSpeech"`
+	OutputSpeech OutputSpeech `json:"outputSpeech,omitempty"`
 }
 
-type Directive struct {
-	Type string `json:"type"`
+type Directives struct {
+	Type string `json:"type,omitempty"`
 }
