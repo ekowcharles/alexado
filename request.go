@@ -39,8 +39,8 @@ type System struct {
 }
 
 type Attributes struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
+	Key   string `json:"key,omitempty"`
+	Value string `json:"value,omitempty"`
 }
 
 type Device struct {
