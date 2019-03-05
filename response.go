@@ -1,9 +1,17 @@
 package alexado
 
+import "encoding/json"
+
 type AlexaResponse struct {
 	Version           string      `json:"version,omitempty"`
 	SessionAttributes *Attributes `json:"sessionAttributes,omitempty"`
 	Response          Response    `json:"response,omitempty"`
+}
+
+func (t AlexaResponse) toJSON() string {
+	toJSON, _ := json.Marshal(t)
+
+	return string(toJSON)
 }
 
 type Response struct {

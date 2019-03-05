@@ -1,20 +1,10 @@
 package alexado
 
-import (
-	"encoding/json"
-)
-
 type AlexaRequest struct {
 	Version string  `json:"version"`
 	Session Session `json:"session"`
 	Context Context `json:"context"`
 	Request Request `json:"request"`
-}
-
-func (t AlexaRequest) toJSON() string {
-	toJSON, _ := json.Marshal(t)
-
-	return string(toJSON)
 }
 
 type Session struct {
@@ -36,11 +26,6 @@ type System struct {
 	User           User        `json:"user"`
 	APIEndpoint    string      `json:"apiEndpoint"`
 	APIAccessToken string      `json:"apiAccessToken"`
-}
-
-type Attributes struct {
-	Key   string `json:"key,omitempty"`
-	Value string `json:"value,omitempty"`
 }
 
 type Device struct {
@@ -151,33 +136,33 @@ type IntentType int
 type AmazonIntentType IntentType
 
 const (
-	AmazonCancelIntent           AmazonIntentType = 1
-	AmazonFallbackIntent         AmazonIntentType = 2
-	AmazonHelpIntent             AmazonIntentType = 3
-	AmazonScrollUpIntent         AmazonIntentType = 4
-	AmazonScrollLeftIntent       AmazonIntentType = 5
-	AmazonScrollDownIntent       AmazonIntentType = 6
-	AmazonScrollRightIntent      AmazonIntentType = 7
-	AmazonPageUpIntent           AmazonIntentType = 8
-	AmazonPageDownIntent         AmazonIntentType = 9
-	AmazonMoreIntent             AmazonIntentType = 10
-	AmazonNavigateHomeIntent     AmazonIntentType = 11
-	AmazonNavigateSettingsIntent AmazonIntentType = 12
-	AmazonLoopOffIntent          AmazonIntentType = 13
-	AmazonLoopOnIntent           AmazonIntentType = 14
-	AmazonNextIntent             AmazonIntentType = 15
-	AmazonPauseIntent            AmazonIntentType = 16
-	AmazonPreviousIntent         AmazonIntentType = 17
-	AmazonNexIntent              AmazonIntentType = 18
-	AmazonRepeatIntent           AmazonIntentType = 19
-	AmazonResumeIntent           AmazonIntentType = 20
-	AmazonSelectIntent           AmazonIntentType = 21
-	AmazonShuffleOffIntent       AmazonIntentType = 22
-	AmazonShuffleOnIntent        AmazonIntentType = 23
-	AmazonStartOverIntent        AmazonIntentType = 24
-	AmazonStopIntent             AmazonIntentType = 25
-	AmazonYesIntent              AmazonIntentType = 26
-	AmazonNoIntent               AmazonIntentType = 27
+	AmazonCancelIntent           AmazonIntentType = 0
+	AmazonFallbackIntent         AmazonIntentType = 1
+	AmazonHelpIntent             AmazonIntentType = 2
+	AmazonScrollUpIntent         AmazonIntentType = 3
+	AmazonScrollLeftIntent       AmazonIntentType = 4
+	AmazonScrollDownIntent       AmazonIntentType = 5
+	AmazonScrollRightIntent      AmazonIntentType = 6
+	AmazonPageUpIntent           AmazonIntentType = 7
+	AmazonPageDownIntent         AmazonIntentType = 8
+	AmazonMoreIntent             AmazonIntentType = 9
+	AmazonNavigateHomeIntent     AmazonIntentType = 10
+	AmazonNavigateSettingsIntent AmazonIntentType = 11
+	AmazonLoopOffIntent          AmazonIntentType = 12
+	AmazonLoopOnIntent           AmazonIntentType = 13
+	AmazonNextIntent             AmazonIntentType = 14
+	AmazonPauseIntent            AmazonIntentType = 15
+	AmazonPreviousIntent         AmazonIntentType = 16
+	AmazonNexIntent              AmazonIntentType = 17
+	AmazonRepeatIntent           AmazonIntentType = 18
+	AmazonResumeIntent           AmazonIntentType = 19
+	AmazonSelectIntent           AmazonIntentType = 20
+	AmazonShuffleOffIntent       AmazonIntentType = 21
+	AmazonShuffleOnIntent        AmazonIntentType = 22
+	AmazonStartOverIntent        AmazonIntentType = 23
+	AmazonStopIntent             AmazonIntentType = 24
+	AmazonYesIntent              AmazonIntentType = 25
+	AmazonNoIntent               AmazonIntentType = 26
 )
 
 func (a AmazonIntentType) String() string {
