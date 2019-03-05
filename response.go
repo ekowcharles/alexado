@@ -1,4 +1,4 @@
-package alexa
+package alexado
 
 type AlexaResponse struct {
 	Version           string      `json:"version,omitempty"`

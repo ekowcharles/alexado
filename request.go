@@ -1,4 +1,4 @@
-package alexa
+package alexado
 
 import (
 	"encoding/json"
