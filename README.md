@@ -48,65 +48,70 @@ io.WriteString(w, string(responseBody)) # io is from the io/ioutil package
 
 ```json
 {
-	"version": "1.0",
-	"session": {
-		"new": false,
-		"sessionId": "amzn1.echo-api.session.[SomeIdentifier]",
-		"application": {
-			"applicationId": "amzn1.ask.skill.[SomeIdentifier]"
-		},
-		"user": {
-			"userId": "amzn1.ask.account.[SomeRandomString]"
-		}
-	},
-	"context": {
-		"System": {
-			"application": {
-				"applicationId": "amzn1.ask.skill.[SomeIdentifier]"
-			},
-			"user": {
-				"userId": "amzn1.ask.account.[SomeRandomString]"
-			},
-			"device": {
-				"deviceId": "amzn1.ask.device.[SomeRandomString]",
-				"supportedInterfaces": {}
-			},
-			"apiEndpoint": "https://api.amazonalexa.com",
-			"apiAccessToken": "[ReallyLongRandomString]"
-		},
-		"Viewport": {
-			"experiences": [{
-				"arcMinuteWidth": 246,
-				"arcMinuteHeight": 144,
-				"canRotate": false,
-				"canResize": false
-			}],
-			"shape": "RECTANGLE",
-			"pixelWidth": 1024,
-			"pixelHeight": 600,
-			"dpi": 160,
-			"currentPixelWidth": 1024,
-			"currentPixelHeight": 600,
-			"touch": ["SINGLE"]
-		}
-	},
-	"request": {
-		"type": "IntentRequest",
-		"requestId": "amzn1.echo-api.request.[SomeIdentifier]",
-		"timestamp": "2023-10-21T05:36:12Z",
-		"locale": "en-US",
-		"intent": {
-			"name": "RecordIntent",
-			"confirmationStatus": "NONE",
-			"slots": [{
-					"name": "speech",
-					"value": "Alexa-do's got you covered!",
-					"confirmationStatus": "NONE",
-					"source": "USER"
-				}
-			]
-		}
-	}
+  "version": "1.0",
+  "session": {
+    "new": false,
+    "sessionId": "amzn1.echo-api.session.[SomeIdentifier]",
+    "application": {
+      "applicationId": "amzn1.ask.skill.[SomeIdentifier]"
+    },
+    "user": {
+      "userId": "amzn1.ask.account.[SomeRandomString]"
+    }
+  },
+  "context": {
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.[SomeIdentifier]"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.[SomeRandomString]"
+      },
+      "device": {
+        "deviceId": "amzn1.ask.device.[SomeRandomString]",
+        "supportedInterfaces": {}
+      },
+      "apiEndpoint": "https://api.amazonalexa.com",
+      "apiAccessToken": "[ReallyLongRandomString]"
+    },
+    "Viewport": {
+      "experiences": [
+        {
+          "arcMinuteWidth": 246,
+          "arcMinuteHeight": 144,
+          "canRotate": false,
+          "canResize": false
+        }
+      ],
+      "shape": "RECTANGLE",
+      "pixelWidth": 1024,
+      "pixelHeight": 600,
+      "dpi": 160,
+      "currentPixelWidth": 1024,
+      "currentPixelHeight": 600,
+      "touch": [
+        "SINGLE"
+      ]
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "amzn1.echo-api.request.[SomeIdentifier]",
+    "timestamp": "2023-10-21T05:36:12Z",
+    "locale": "en-US",
+    "intent": {
+      "name": "RecordIntent",
+      "confirmationStatus": "NONE",
+      "slots": [
+        {
+          "name": "speech",
+          "value": "Alexa-do's got you covered!",
+          "confirmationStatus": "NONE",
+          "source": "USER"
+        }
+      ]
+    }
+  }
 }
 ```
 
@@ -114,13 +119,13 @@ io.WriteString(w, string(responseBody)) # io is from the io/ioutil package
 
 ```json
 {
-    "version": "1.0",
-    "response": {
-        "outputSpeech": {
-            "type": "SSML",
-            "ssml": "<speak>Alexa-do's got you covered!</speak>"
-        }
+  "version": "1.0",
+  "response": {
+    "outputSpeech": {
+      "type": "SSML",
+      "ssml": "<speak>Alexa-do's got you covered!</speak>"
     }
+  }
 }
 ```
 
