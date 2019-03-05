@@ -1,10 +1,10 @@
 language: go
-
 go:
 - 1.12
-
-script:   
+script:
 - go test -race -coverprofile=coverage.txt -covermode=atomic
-
 after_success:
 - bash <(curl -s https://codecov.io/bash)
+notifications:
+  slack:
+    secure: S3+pyO6kUTXcSAOrb6nIXtkj/pzYDxAOQF8A3bQvPPq2yUYE7dq7DWu6nfnfgXzZQXt11mZEHKIZ63XgOgrKcvNCbTqZnsfv9iI+EHn2U5d3bBl86DqLhNh85jaDoNfmecsOev76T5ETJ9VqheHRoQaUzf1rrpsld6zuYPbi1xnKMMVfG/au1KgjpVc7z/NiVzvlWtlh0LwW/cY3VgOjOpcZ+BQQ2VjT6wAPXTdrVGzfI/6ozyd9SQXfAIx4gYBv9T2lRV0uRM4L3J9F+lNlgl7rrEVqvoulmGgZQMp+/A8YVfAdy79c+/hm5svMIDAO4BO/ub0P1jUk6o6zNQpwFrZ0OyAXfYvkUbpvMbERg35VAWuc+LgeCb0m/zUyB35WqVrOO0EDFc+9UWcPQjwPsgPEkZefk1KNzMK/MBz7uq6OlEX5gTQ076/gOsx5auxOcUkbligR73ucxgs6ug4YbP9zi9oGIYAcBmtY3BbhyLBeBdvosJaYPj2r9CsIwI7qaS+PpCHH/CqXcIKJ7/mbrHQkY3bFjy4/9bY+z7C4WvxE8ew2085mUJfmWxyDPGUZKAab+88epGTFx05rU5xYq6geJ234z25sHJ9HD0oEn5mtVcH1jh+L6RZfZDGI8867k61a4sM/T0JcpRJXV3HRMwTld2OSoXzkesUZ/YH5BCU=
