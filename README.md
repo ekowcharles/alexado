@@ -110,7 +110,6 @@ io.WriteString(w, string(responseBody)) # io is from the io/ioutil package
 }
 ```
 
-
 ### Response to Alexa platform
 
 ```json
@@ -128,6 +127,10 @@ io.WriteString(w, string(responseBody)) # io is from the io/ioutil package
 ## Forum
 
 [Join](https://join.slack.com/t/alexalibraries/shared_invite/enQtNTY3MDMyODU4ODk5LTBkMWNiNTVjYTY2MTJlMWMxY2M3YWI0NGFhY2Q3NzhhNWQ3ZDg5MWIyNzFmMTk0NTBlMzRiOGYyNTE4YjNlNzg) the discussion on slack.
+
+## Contribution
+
+Feel free to make a pull request. For bigger changes, create a issue first to discuss it.
 
 # License
 
