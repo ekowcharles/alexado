@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.com/ekowcharles/alexado.svg?branch=master)](https://travis-ci.com/ekowcharles/alexado) [![codecov](https://codecov.io/gh/ekowcharles/alexado/branch/master/graph/badge.svg)](https://codecov.io/gh/ekowcharles/alexado)
 
-Go library that provides objects and basic behaviors for the sending requests to and processing responses for Alexa.
+Go library that provides objects and basic behavior for the sending requests to and processing responses for Alexa.
 
 ## Usage
 
