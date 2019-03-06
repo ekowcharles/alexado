@@ -10,6 +10,11 @@ func TestRequestTypeString(t *testing.T) {
 		t.Errorf("%s != %s", actual, expected)
 	}
 
+	actual, expected = CanFulfillIntentRequest.String(), "CanFulfillIntentRequest"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+
 	actual, expected = SessionEndedRequest.String(), "SessionEndedRequest"
 	if actual != expected {
 		t.Errorf("%s != %s", actual, expected)
@@ -87,62 +92,12 @@ func TestAmazonIntentTypeString(t *testing.T) {
 		t.Errorf("%s != %s", actual, expected)
 	}
 
-	actual, expected = AmazonScrollUpIntent.String(), "AMAZON.ScrollUpIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonScrollLeftIntent.String(), "AMAZON.ScrollLeftIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonScrollDownIntent.String(), "AMAZON.ScrollDownIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonScrollRightIntent.String(), "AMAZON.ScrollRightIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonPageUpIntent.String(), "AMAZON.PageUpIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonPageDownIntent.String(), "AMAZON.PageDownIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonMoreIntent.String(), "AMAZON.MoreIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonNavigateHomeIntent.String(), "AMAZON.NavigateHomeIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonNavigateSettingsIntent.String(), "AMAZON.NavigateSettingsIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
 	actual, expected = AmazonLoopOffIntent.String(), "AMAZON.LoopOffIntent"
 	if actual != expected {
 		t.Errorf("%s != %s", actual, expected)
 	}
 
 	actual, expected = AmazonLoopOnIntent.String(), "AMAZON.LoopOnIntent"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = AmazonNextIntent.String(), "AMAZON.NextIntent"
 	if actual != expected {
 		t.Errorf("%s != %s", actual, expected)
 	}
@@ -157,7 +112,7 @@ func TestAmazonIntentTypeString(t *testing.T) {
 		t.Errorf("%s != %s", actual, expected)
 	}
 
-	actual, expected = AmazonNexIntent.String(), "AMAZON.NexIntent"
+	actual, expected = AmazonNextIntent.String(), "AMAZON.NextIntent"
 	if actual != expected {
 		t.Errorf("%s != %s", actual, expected)
 	}
