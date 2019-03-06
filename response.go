@@ -1,3 +1,4 @@
+// Package alexado provides objects and basic behavior for the sending requests to and processing responses for Alexa
 package alexado
 
 import "encoding/json"
