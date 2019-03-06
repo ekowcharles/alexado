@@ -73,6 +73,21 @@ func TestFalseIsIntentRequest(t *testing.T) {
 		t.Errorf("%s is not a IntentRequest", r.Type)
 	}
 }
+func TestTrueIsCanFulfillIntentRequest(t *testing.T) {
+	r := Request{Type: CanFulfillIntentRequest.String()}
+
+	if !r.IsCanFulfillIntentRequest() {
+		t.Errorf("%s is not a CanFulfillIntentRequest", r.Type)
+	}
+}
+
+func TestFalseIsCanFulfillIntentRequest(t *testing.T) {
+	r := Request{Type: "SomeRequest"}
+
+	if r.IsCanFulfillIntentRequest() {
+		t.Errorf("%s is not a CanFulfillIntentRequest", r.Type)
+	}
+}
 
 func TestAmazonIntentTypeString(t *testing.T) {
 	var actual, expected string

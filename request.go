@@ -102,6 +102,10 @@ type ConfirmationStatus string
 const (
 	// None indicates user has neither confirmed or denied the value of the slot.
 	None ConfirmationStatus = "NONE"
+	// Confirmed indicates user confirmed the value of the slot.
+	Confirmed ConfirmationStatus = "CONFIRMED"
+	// Denied indicates user denied the value of the slot.
+	Denied ConfirmationStatus = "DENIED"
 )
 
 type Source string
