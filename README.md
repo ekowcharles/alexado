@@ -12,34 +12,38 @@ The following snippet show how to use this library to process request received f
 ```go
 b, err := ioutil.ReadAll(r.Body) # 'r' is a pointer to http.Request
 if err != nil {
-	... # handle error
+  ... // handle error
 }
 
-ar := alexa.AlexaRequest{}
+areq := AlexaRequest{}
 err = json.Unmarshal(b, &alexaRequest)
 if err != nil {
-	... # handle error
+  ... // handle error
 }
 
-# at this point 'ar' should have everything you need to access data in the Alexa request
+# at this point 'areq' should have everything you need to access data in the Alexa request
 ```
 
 The following demonstrates how you would use the alexado library to construct a response to be sent to the Alexa platform:
 ```go
-alexaResponse := alexa.AlexaResponse{}
-alexaResponse.Version = "1.0"
+ares := alexado.AlexaResponse{}
+ares.Version = "1.0"
 
-outputSpeech := alexa.OutputSpeech{}
-outputSpeech.Type = alexa.SSML.String()
+outputSpeech := alexado.OutputSpeech{}
+outputSpeech.Type = alexado.SSML.String()
 outputSpeech.SSML = "<speak>Alexa-do's got you covered!</speak>"
+ares.Response.OutputSpeech = &outputSpeech
 
-alexaResponse.Response.ShouldEndSession = true
+ares.Response.ShouldEndSession = true
 
-alexaResponse.Response.OutputSpeech = &outputSpeech
+responseBody = ares.toJSON()
+if responseBody == nil {
+  ... // handle serialization error
+}
 
-w.WriteHeader(http.StatusOK) # is an http.ResponseWriter object
+w.WriteHeader(http.StatusOK) // is an http.ResponseWriter object
 w.Header().Add("ContentType", "application/json")
-io.WriteString(w, string(responseBody)) # io is from the io/ioutil package
+io.WriteString(w, string(responseBody)) // io is from the io/ioutil package
 ```
 
 ## Samples
@@ -50,48 +54,47 @@ io.WriteString(w, string(responseBody)) # io is from the io/ioutil package
 {
   "version": "1.0",
   "session": {
-    "new": false,
-    "sessionId": "amzn1.echo-api.session.[SomeIdentifier]",
+    "new": true,
+    "sessionId": "amzn1.echo-api.session.[unique-value-here]",
     "application": {
-      "applicationId": "amzn1.ask.skill.[SomeIdentifier]"
+      "applicationId": "amzn1.ask.skill.[unique-value-here]"
+    },
+    "attributes": {
+      "key": "string value"
     },
     "user": {
-      "userId": "amzn1.ask.account.[SomeRandomString]"
+      "userId": "amzn1.ask.account.[unique-value-here]",
+      "accessToken": "Atza|AAAAAAAA...",
+      "permissions": {
+        "consentToken": "ZZZZZZZ..."
+      }
     }
   },
   "context": {
     "System": {
+      "device": {
+        "deviceId": "string",
+        "supportedInterfaces": {
+          "AudioPlayer": {}
+        }
+      },
       "application": {
-        "applicationId": "amzn1.ask.skill.[SomeIdentifier]"
+        "applicationId": "amzn1.ask.skill.[unique-value-here]"
       },
       "user": {
-        "userId": "amzn1.ask.account.[SomeRandomString]"
-      },
-      "device": {
-        "deviceId": "amzn1.ask.device.[SomeRandomString]",
-        "supportedInterfaces": {}
+        "userId": "amzn1.ask.account.[unique-value-here]",
+        "accessToken": "Atza|AAAAAAAA...",
+        "permissions": {
+          "consentToken": "ZZZZZZZ..."
+        }
       },
       "apiEndpoint": "https://api.amazonalexa.com",
-      "apiAccessToken": "[ReallyLongRandomString]"
+      "apiAccessToken": "AxThk..."
     },
-    "Viewport": {
-      "experiences": [
-        {
-          "arcMinuteWidth": 246,
-          "arcMinuteHeight": 144,
-          "canRotate": false,
-          "canResize": false
-        }
-      ],
-      "shape": "RECTANGLE",
-      "pixelWidth": 1024,
-      "pixelHeight": 600,
-      "dpi": 160,
-      "currentPixelWidth": 1024,
-      "currentPixelHeight": 600,
-      "touch": [
-        "SINGLE"
-      ]
+    "AudioPlayer": {
+      "playerActivity": "PLAYING",
+      "token": "audioplayer-token",
+      "offsetInMilliseconds": 0
     }
   },
   "request": {
@@ -119,12 +122,39 @@ io.WriteString(w, string(responseBody)) # io is from the io/ioutil package
 
 ```json
 {
-  "version": "1.0",
+  "version": "string",
+  "sessionAttributes": {
+    "key": "value"
+  },
   "response": {
     "outputSpeech": {
-      "type": "SSML",
-      "ssml": "<speak>Alexa-do's got you covered!</speak>"
-    }
+      "type": "PlainText",
+      "text": "Plain text string to speak",
+      "playBehavior": "REPLACE_ENQUEUED"
+    },
+    "card": {
+      "type": "Standard",
+      "title": "Title of the card",
+      "text": "Text content for a standard card",
+      "image": {
+        "smallImageUrl": "https://url-to-small-card-image...",
+        "largeImageUrl": "https://url-to-large-card-image..."
+      }
+    },
+    "reprompt": {
+      "outputSpeech": {
+        "type": "PlainText",
+        "text": "Plain text string to speak",
+        "playBehavior": "REPLACE_ENQUEUED"
+      }
+    },
+    "directives": [
+      {
+        "type": "InterfaceName.Directive"
+        (...properties depend on the directive type)
+      }
+    ],
+    "shouldEndSession": true
   }
 }
 ```
