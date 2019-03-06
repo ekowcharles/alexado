@@ -151,7 +151,6 @@ io.WriteString(w, string(responseBody)) // io is from the io/ioutil package
     "directives": [
       {
         "type": "InterfaceName.Directive"
-        (...properties depend on the directive type)
       }
     ],
     "shouldEndSession": true
