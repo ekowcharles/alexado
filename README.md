@@ -10,7 +10,7 @@ Go library that provides objects and basic behavior for the sending requests to 
 
 The following snippet show how to use this library to process request received from the Alexa platform:
 ```go
-b, err := ioutil.ReadAll(r.Body) # 'r' is a pointer to http.Request
+b, err := ioutil.ReadAll(r.Body) // 'r' is a pointer to http.Request
 if err != nil {
   ... // handle error
 }
