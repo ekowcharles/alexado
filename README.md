@@ -21,7 +21,7 @@ if err != nil {
   ... // handle error
 }
 
-# at this point 'areq' should have everything you need to access data in the Alexa request
+// at this point 'areq' should have everything you need to access data in the Alexa request
 ```
 
 The following demonstrates how you would use the alexado library to construct a response to be sent to the Alexa platform:
