@@ -36,14 +36,14 @@ ares.Response.OutputSpeech = &outputSpeech
 
 ares.Response.ShouldEndSession = true
 
-responseBody = ares.toJSON()
-if responseBody == nil {
+responseBody, err = ares.toJSON()
+if err != nil {
   ... // handle serialization error
 }
 
 w.WriteHeader(http.StatusOK) // is an http.ResponseWriter object
 w.Header().Add("ContentType", "application/json")
-io.WriteString(w, string(responseBody)) // io is from the io/ioutil package
+io.WriteString(w, responseBody) // io is from the io/ioutil package
 ```
 
 ## Samples

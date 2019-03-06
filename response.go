@@ -9,10 +9,10 @@ type AlexaResponse struct {
 	Response          Response    `json:"response,omitempty"`
 }
 
-func (t AlexaResponse) toJSON() string {
-	toJSON, _ := json.Marshal(t)
+func (t AlexaResponse) toJSON() (string, error) {
+	toJSON, err := json.Marshal(t)
 
-	return string(toJSON)
+	return string(toJSON), err
 }
 
 type Response struct {
