@@ -36,7 +36,7 @@ ares.Response.OutputSpeech = &outputSpeech
 
 ares.Response.ShouldEndSession = true
 
-responseBody, err = ares.toJSON()
+responseBody, err = ares.ToJSON()
 if err != nil {
   ... // handle serialization error
 }
