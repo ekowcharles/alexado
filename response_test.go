@@ -8,7 +8,7 @@ func TestToJSON(t *testing.T) {
 	res := Response{OutputSpeech: &osp}
 	req := AlexaResponse{Version: "1.0", Response: res, SessionAttributes: &sa}
 
-	j := req.toJSON()
+	j, _ := req.ToJSON()
 
 	e := string(`{"version":"1.0","sessionAttributes":{"key":"foo","value":"bar"},"response":{"outputSpeech":{"type":"SSML","ssml":"Some good speech."}}}`)
 
