@@ -86,7 +86,7 @@ type Request struct {
 type Intent struct {
 	Name               string             `json:"name"`
 	ConfirmationStatus ConfirmationStatus `json:"confirmationStatus"`
-	Slots              []Slot             `json:"slots"`
+	Slots              interface{}        `json:"slots"`
 }
 
 type Slot struct {
