@@ -180,6 +180,8 @@ Content-Type: application/json
 }
 ```
 
+Add some more tests for enumerations
+
 ## References
 
 - [Request and Response JSON Reference](https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html)

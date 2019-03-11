@@ -8,6 +8,103 @@ import (
 	"time"
 )
 
+func TestShapeTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = Rectangle.String(), "RECTANGLE"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+
+	actual, expected = Round.String(), "ROUND"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+}
+
+func TestTouchTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = Single.String(), "SINGLE"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+}
+
+func TestKeyboardTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = Direction.String(), "DIRECTION"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+}
+func TestThemeTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = Light.String(), "LIGHT"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+
+	actual, expected = Dark.String(), "DARK"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+}
+
+func TestConfirmationStatusTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = None.String(), "NONE"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+
+	actual, expected = Confirmed.String(), "CONFIRMED"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+
+	actual, expected = Denied.String(), "DENIED"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+}
+
+func TestSourceTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = UserSource.String(), "USER"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+}
+
+func TestRequestTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = LaunchRequest.String(), "LaunchRequest"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+
+	actual, expected = CanFulfillIntentRequest.String(), "CanFulfillIntentRequest"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+
+	actual, expected = SessionEndedRequest.String(), "SessionEndedRequest"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+
+	actual, expected = IntentRequest.String(), "IntentRequest"
+	if actual != expected {
+		t.Errorf("%s != %s", actual, expected)
+	}
+}
+
 func TestAmazonIntentTypeString(t *testing.T) {
 	var actual, expected string
 
@@ -94,6 +191,70 @@ func TestAmazonIntentTypeString(t *testing.T) {
 	actual, expected = AmazonNoIntent.String(), "AMAZON.NoIntent"
 	if actual != expected {
 		t.Errorf("%s != %s", actual, expected)
+	}
+}
+
+func TestLocaleTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = DeDe.String(), "de-DE"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = EnAu.String(), "en-AU"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = EnCa.String(), "en-CA"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = EnGb.String(), "en-GB"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = EnIn.String(), "en-IN"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = EnUs.String(), "en-US"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = EsEs.String(), "es-ES"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = EsMx.String(), "es-MX"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = FrCa.String(), "fr-CA"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = FrFr.String(), "fr-FR"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = ItIt.String(), "it-IT"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = JaJp.String(), "ja-JP"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 

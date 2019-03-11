@@ -175,18 +175,18 @@ type Slot struct {
 }
 
 //ConfirmationStatus is an enumeration indicating whether the user has explicitly confirmed or denied the value of this slot.
-type ConfirmationStatus int
+type ConfirmationStatusType int
 
 const (
 	// None indicates user has neither confirmed or denied the value of the slot.
-	None ConfirmationStatus = iota
+	None ConfirmationStatusType = iota
 	// Confirmed indicates user confirmed the value of the slot.
 	Confirmed
 	// Denied indicates user denied the value of the slot.
 	Denied
 )
 
-func (c ConfirmationStatus) String() string {
+func (c ConfirmationStatusType) String() string {
 	return [...]string{
 		"NONE",
 		"CONFIRMED",
@@ -194,13 +194,13 @@ func (c ConfirmationStatus) String() string {
 	}[c]
 }
 
-type Source int
+type SourceType int
 
 const (
-	UserSource Source = iota
+	UserSource SourceType = iota
 )
 
-func (s Source) String() string {
+func (s SourceType) String() string {
 	return [...]string{
 		"USER",
 	}[s]
@@ -297,11 +297,11 @@ func (a AmazonIntentType) String() string {
 }
 
 // Locale represents the list of locales that Alexa supports
-type Locale int
+type LocaleType int
 
 const (
 	// DeDe German (DE)
-	DeDe Locale = iota
+	DeDe LocaleType = iota
 	// EnAu English (AU)
 	EnAu
 	// EnCa English (CA)
@@ -326,7 +326,7 @@ const (
 	JaJp
 )
 
-func (l Locale) String() string {
+func (l LocaleType) String() string {
 	return [...]string{
 		"de-DE",
 		"en-AU",
