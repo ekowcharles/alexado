@@ -13,12 +13,12 @@ func TestShapeTypeString(t *testing.T) {
 
 	actual, expected = Rectangle.String(), "RECTANGLE"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = Round.String(), "ROUND"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 
@@ -27,7 +27,7 @@ func TestTouchTypeString(t *testing.T) {
 
 	actual, expected = Single.String(), "SINGLE"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 
@@ -36,7 +36,7 @@ func TestKeyboardTypeString(t *testing.T) {
 
 	actual, expected = Direction.String(), "DIRECTION"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 func TestThemeTypeString(t *testing.T) {
@@ -44,12 +44,12 @@ func TestThemeTypeString(t *testing.T) {
 
 	actual, expected = Light.String(), "LIGHT"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = Dark.String(), "DARK"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 
@@ -58,17 +58,17 @@ func TestConfirmationStatusTypeString(t *testing.T) {
 
 	actual, expected = None.String(), "NONE"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = Confirmed.String(), "CONFIRMED"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = Denied.String(), "DENIED"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 
@@ -77,7 +77,7 @@ func TestSourceTypeString(t *testing.T) {
 
 	actual, expected = UserSource.String(), "USER"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 
@@ -86,22 +86,22 @@ func TestRequestTypeString(t *testing.T) {
 
 	actual, expected = LaunchRequest.String(), "LaunchRequest"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = CanFulfillIntentRequest.String(), "CanFulfillIntentRequest"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = SessionEndedRequest.String(), "SessionEndedRequest"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = IntentRequest.String(), "IntentRequest"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 
@@ -110,87 +110,87 @@ func TestAmazonIntentTypeString(t *testing.T) {
 
 	actual, expected = AmazonCancelIntent.String(), "AMAZON.CancelIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonFallbackIntent.String(), "AMAZON.FallbackIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonHelpIntent.String(), "AMAZON.HelpIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonLoopOffIntent.String(), "AMAZON.LoopOffIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonLoopOnIntent.String(), "AMAZON.LoopOnIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonPauseIntent.String(), "AMAZON.PauseIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonPreviousIntent.String(), "AMAZON.PreviousIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonNextIntent.String(), "AMAZON.NextIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonRepeatIntent.String(), "AMAZON.RepeatIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonResumeIntent.String(), "AMAZON.ResumeIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonSelectIntent.String(), "AMAZON.SelectIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonShuffleOffIntent.String(), "AMAZON.ShuffleOffIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonShuffleOnIntent.String(), "AMAZON.ShuffleOnIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonStartOverIntent.String(), "AMAZON.StartOverIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonStopIntent.String(), "AMAZON.StopIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonYesIntent.String(), "AMAZON.YesIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 
 	actual, expected = AmazonNoIntent.String(), "AMAZON.NoIntent"
 	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }
 
