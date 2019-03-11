@@ -160,6 +160,26 @@ io.WriteString(w, responseBody) // io is from the io/ioutil package
 }
 ```
 
+## Todo
+
+Add support for [progressive response](https://developer.amazon.com/docs/custom-skills/send-the-user-a-progressive-response.html#directive-request).
+
+```json
+POST {context.System.apiEndpoint}/v1/directives HTTP/1.1
+Authorization: Bearer {context.System.apiAccessToken}
+Content-Type: application/json
+
+{
+  "header":{
+    "requestId":"{request.requestId}"
+  },
+  "directive":{
+    "type":"VoicePlayer.Speak",
+    "speech":"This text is spoken while your skill processes the full response."
+  }
+}
+```
+
 ## Forum
 
 [Join](https://join.slack.com/t/alexalibraries/shared_invite/enQtNTY3MDMyODU4ODk5LTBkMWNiNTVjYTY2MTJlMWMxY2M3YWI0NGFhY2Q3NzhhNWQ3ZDg5MWIyNzFmMTk0NTBlMzRiOGYyNTE4YjNlNzg) the discussion on slack.
