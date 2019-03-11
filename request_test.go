@@ -1,93 +1,12 @@
 package alexado
 
-import "testing"
-
-func TestRequestTypeString(t *testing.T) {
-	var actual, expected string
-
-	actual, expected = LaunchRequest.String(), "LaunchRequest"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = CanFulfillIntentRequest.String(), "CanFulfillIntentRequest"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = SessionEndedRequest.String(), "SessionEndedRequest"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-
-	actual, expected = IntentRequest.String(), "IntentRequest"
-	if actual != expected {
-		t.Errorf("%s != %s", actual, expected)
-	}
-}
-
-func TestTrueIsLaunchRequest(t *testing.T) {
-	r := Request{Type: LaunchRequest.String()}
-
-	if !r.IsLaunchRequest() {
-		t.Errorf("%s is not a LaunchRequest", r.Type)
-	}
-}
-
-func TestFalseIsLaunchRequest(t *testing.T) {
-	r := Request{Type: "SomeRequest"}
-
-	if r.IsLaunchRequest() {
-		t.Errorf("%s is not a LaunchRequest", r.Type)
-	}
-}
-
-func TestTrueIsSessionEndedRequest(t *testing.T) {
-	r := Request{Type: SessionEndedRequest.String()}
-
-	if !r.IsSessionEndedRequest() {
-		t.Errorf("%s is not a SessionEndedRequest", r.Type)
-	}
-}
-
-func TestFalseIsSessionEndedRequest(t *testing.T) {
-	r := Request{Type: "SomeRequest"}
-
-	if r.IsSessionEndedRequest() {
-		t.Errorf("%s is not a SessionEndedRequest", r.Type)
-	}
-}
-
-func TestTrueIsIntentRequest(t *testing.T) {
-	r := Request{Type: IntentRequest.String()}
-
-	if !r.IsIntentRequest() {
-		t.Errorf("%s is not a IntentRequest", r.Type)
-	}
-}
-
-func TestFalseIsIntentRequest(t *testing.T) {
-	r := Request{Type: "SomeRequest"}
-
-	if r.IsIntentRequest() {
-		t.Errorf("%s is not a IntentRequest", r.Type)
-	}
-}
-func TestTrueIsCanFulfillIntentRequest(t *testing.T) {
-	r := Request{Type: CanFulfillIntentRequest.String()}
-
-	if !r.IsCanFulfillIntentRequest() {
-		t.Errorf("%s is not a CanFulfillIntentRequest", r.Type)
-	}
-}
-
-func TestFalseIsCanFulfillIntentRequest(t *testing.T) {
-	r := Request{Type: "SomeRequest"}
-
-	if r.IsCanFulfillIntentRequest() {
-		t.Errorf("%s is not a CanFulfillIntentRequest", r.Type)
-	}
-}
+import (
+	"encoding/json"
+	"io/ioutil"
+	"os"
+	"testing"
+	"time"
+)
 
 func TestAmazonIntentTypeString(t *testing.T) {
 	var actual, expected string
@@ -175,5 +94,179 @@ func TestAmazonIntentTypeString(t *testing.T) {
 	actual, expected = AmazonNoIntent.String(), "AMAZON.NoIntent"
 	if actual != expected {
 		t.Errorf("%s != %s", actual, expected)
+	}
+}
+
+// The quickest way to test this is to compare the loaded json sample with the json result when the AlexaRequest is marshalled
+// While this tests that the json result is the same as the json input, it does not test that the proper resource dependencies
+// or nesting exist on the AlexaRequest Object hence this long seemingly convoluted approach to testing
+func TestRequestUnmarshallsCorrectly(t *testing.T) {
+	jsonFile, _ := os.Open("sample/request.json")
+	defer jsonFile.Close()
+
+	content, _ := ioutil.ReadAll(jsonFile)
+
+	var alexaRequest = new(AlexaRequest)
+
+	json.Unmarshal(content, alexaRequest)
+
+	var actual, expected interface{}
+
+	actual, expected = alexaRequest.Version, "1.0"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	session := alexaRequest.Session
+	actual, expected = session.New, false
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = session.SessionID, "amzn1.echo-api.session.fcb76599-689e-401a-b305-d5556944f933"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = session.Application.ApplicationID, "amzn1.ask.skill.2604e1db-063f-4f29-a411-6eba27b9dc34"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = session.User.UserID, "amzn1.ask.account.userid"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	system := alexaRequest.Context.System
+	actual, expected = system.Application.ApplicationID, "amzn1.ask.skill.2604e1db-063f-4f29-a411-6eba27b9dc34"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = system.User.UserID, "amzn1.ask.account.userid"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = system.Device.DeviceID, "amzn1.ask.device.deviceid"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = system.APIEndpoint, "https://api.amazonalexa.com"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = system.APIAccessToken, "reallylongrandomcharacters"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	viewport := alexaRequest.Context.Viewport
+	experience := viewport.Experiences[0]
+
+	actual, expected = experience.ArcMinuteWidth, 246
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = experience.ArcMinuteHeight, 144
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = experience.CanRotate, false
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = experience.CanResize, false
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = experience.CanResize, false
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.Shape, Rectangle.String()
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.Theme, Light.String()
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.PixelWidth, 1024
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.PixelHeight, 600
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.DPI, 160
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.CurrentPixelWidth, 1024
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.CurrentPixelHeight, 600
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.Touch[0], Single.String()
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = viewport.Keyboard[0], Direction.String()
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	request := alexaRequest.Request
+	actual, expected = request.Type, IntentRequest.String()
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = request.RequestID, "amzn1.echo-api.request.d60f9912-bf40-48ab-aa53-c38f46e6fb1f"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	tt, _ := time.Parse(time.RFC3339, "2019-02-23T05:26:19Z")
+	actual, expected = request.Timestamp, tt
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = request.Locale, EnUs.String()
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	intent := request.Intent
+	actual, expected = intent.Name, "MyCustomIntent"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = intent.ConfirmationStatus, None.String()
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
 	}
 }

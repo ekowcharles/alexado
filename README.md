@@ -180,6 +180,10 @@ Content-Type: application/json
 }
 ```
 
+## References
+
+- [Request and Response JSON Reference](https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html)
+
 ## Forum
 
 [Join](https://join.slack.com/t/alexalibraries/shared_invite/enQtNTY3MDMyODU4ODk5LTBkMWNiNTVjYTY2MTJlMWMxY2M3YWI0NGFhY2Q3NzhhNWQ3ZDg5MWIyNzFmMTk0NTBlMzRiOGYyNTE4YjNlNzg) the discussion on slack.

@@ -1,0 +1,68 @@
+{
+  "version": "1.0",
+  "session": {
+    "new": "False",
+    "sessionId": "amzn1.echo-api.session.fcb76599-689e-401a-b305-d5556944f933",
+    "application": {
+      "applicationId": "amzn1.ask.skill.2604e1db-063f-4f29-a411-6eba27b9dc34"
+    },
+    "user": {
+      "userId": "amzn1.ask.account.userid"
+    }
+  },
+  "context": {
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.2604e1db-063f-4f29-a411-6eba27b9dc34"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.userid"
+      },
+      "device": {
+        "deviceId": "amzn1.ask.device.deviceid",
+        "supportedInterfaces": {}
+      },
+      "apiEndpoint": "https://api.amazonalexa.com",
+      "apiAccessToken": "reallylongrandomcharacters"
+    },
+    "Viewport": {
+      "experiences": [
+        {
+          "arcMinuteWidth": 246,
+          "arcMinuteHeight": 144,
+          "canRotate": "False",
+          "canResize": "False"
+        }
+      ],
+      "shape": "RECTANGLE",
+      "theme": "LIGHT",
+      "pixelWidth": 1024,
+      "pixelHeight": 600,
+      "dpi": 160,
+      "currentPixelWidth": 1024,
+      "currentPixelHeight": 600,
+      "touch": [
+        "SINGLE"
+      ],
+      "keyboard": [ "DIRECTION" ]
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "amzn1.echo-api.request.d60f9912-bf40-48ab-aa53-c38f46e6fb1f",
+    "timestamp": "2019-02-23T05:26:19Z",
+    "locale": "en-US",
+    "intent": {
+      "name": "MyCustomIntent",
+      "confirmationStatus": "NONE",
+      "slots": {
+        "speech": {
+          "name": "speech",
+          "value": "Aint this something?",
+          "confirmationStatus": "NONE",
+          "source": "USER"
+        }
+      }
+    }
+  }
+}

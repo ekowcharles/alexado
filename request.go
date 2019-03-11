@@ -1,6 +1,8 @@
 // Package alexado provides objects and basic behavior for the sending requests to and processing responses for Alexa
 package alexado
 
+import "time"
+
 // AlexaRequest is expected request be sent from the Alexa plaform.
 type AlexaRequest struct {
 	Version string  `json:"version"`
@@ -24,6 +26,81 @@ type Session struct {
 type Context struct {
 	System      System      `json:"System"`
 	AudioPlayer AudioPlayer `json:"AudioPlayer"`
+	Viewport    Viewport    `json:"Viewport"`
+}
+
+// Viewport describes the operating characteristics of the display device.
+type Viewport struct {
+	Experiences        []Experience `json:"experiences"`
+	Shape              string       `json:"shape"`              // Shape of the viewport.	RECTANGLE or ROUND.
+	PixelWidth         int          `json:"pixelWidth"`         // maximum viewport value
+	PixelHeight        int          `json:"pixelHeight"`        // maximum viewport value
+	DPI                int          `json:"dpi"`                // Pixel density of the viewport
+	CurrentPixelWidth  int          `json:"currentpixelWidth"`  // viewport width that is currently in use
+	CurrentPixelHeight int          `json:"currentpixelHeight"` // viewport height that is currently in use
+	Theme              string       `json:"theme"`              // Basic color scheme in use. LIGHT or DARK.
+	Touch              []string     `json:"touch"`
+	Keyboard           []string     `json:"keyboard"`
+}
+
+type Experience struct {
+	ArcMinuteWidth  int  `json:"arcMinuteWidth"`
+	ArcMinuteHeight int  `json:"arcMinuteHeight"`
+	CanRotate       bool `json:"canRotate"`
+	CanResize       bool `json:"canResize"`
+}
+
+type ShapeType int
+
+const (
+	Rectangle ShapeType = iota
+	Round
+)
+
+func (s ShapeType) String() string {
+	return [...]string{
+		"RECTANGLE",
+		"ROUND",
+	}[s]
+}
+
+// TouchType represents basic color scheme in use. LIGHT or DARK.
+type TouchType int
+
+const (
+	Single TouchType = iota
+)
+
+func (t TouchType) String() string {
+	return [...]string{
+		"SINGLE",
+	}[t]
+}
+
+type KeyboardType int
+
+const (
+	Direction KeyboardType = iota
+)
+
+func (k KeyboardType) String() string {
+	return [...]string{
+		"DIRECTION",
+	}[k]
+}
+
+type ThemeType int
+
+const (
+	Light ThemeType = iota
+	Dark
+)
+
+func (t ThemeType) String() string {
+	return [...]string{
+		"LIGHT",
+		"DARK",
+	}[t]
 }
 
 // System object provides information about the current state of the Alexa service and the device interacting with your skill.
@@ -75,105 +152,82 @@ type Permissions struct {
 
 // Request provides the details of the user's request. There are several different request types available.
 type Request struct {
-	RequestID string `json:"requestId"`
-	Timestamp string `json:"timestamp"`
-	Locale    string `json:"locale"`
-	Intent    Intent `json:"intent"`
-	Type      string `json:"type"`
+	RequestID string    `json:"requestId"`
+	Timestamp time.Time `json:"timestamp"`
+	Locale    string    `json:"locale"`
+	Intent    Intent    `json:"intent"`
+	Type      string    `json:"type"`
 }
 
 // Intent represents what user wants.
 type Intent struct {
-	Name               string             `json:"name"`
-	ConfirmationStatus ConfirmationStatus `json:"confirmationStatus"`
-	Slots              interface{}        `json:"slots"`
+	Name               string      `json:"name"`
+	ConfirmationStatus string      `json:"confirmationStatus"`
+	Slots              interface{} `json:"slots"`
 }
 
+// Slot represents user defined variables
 type Slot struct {
-	Name               string             `json:"name"`
-	Value              string             `json:"value"`
-	ConfirmationStatus ConfirmationStatus `json:"confirmationStatus"`
-	Source             Source             `json:"source"`
+	Name               string `json:"name"`
+	Value              string `json:"value"`
+	ConfirmationStatus string `json:"confirmationStatus"`
+	Source             string `json:"source"`
 }
 
 //ConfirmationStatus is an enumeration indicating whether the user has explicitly confirmed or denied the value of this slot.
-type ConfirmationStatus string
+type ConfirmationStatus int
 
 const (
 	// None indicates user has neither confirmed or denied the value of the slot.
-	None ConfirmationStatus = "NONE"
+	None ConfirmationStatus = iota
 	// Confirmed indicates user confirmed the value of the slot.
-	Confirmed ConfirmationStatus = "CONFIRMED"
+	Confirmed
 	// Denied indicates user denied the value of the slot.
-	Denied ConfirmationStatus = "DENIED"
+	Denied
 )
 
-type Source string
+func (c ConfirmationStatus) String() string {
+	return [...]string{
+		"NONE",
+		"CONFIRMED",
+		"DENIED",
+	}[c]
+}
+
+type Source int
 
 const (
-	UserSource Source = "USER"
+	UserSource Source = iota
 )
+
+func (s Source) String() string {
+	return [...]string{
+		"USER",
+	}[s]
+}
 
 // RequestType describes types of requests to expect from the Alexa Platform.
 type RequestType int
 
 const (
 	// LaunchRequest represents that a user made a request to an Alexa skill, but did not provide a specific intent.
-	LaunchRequest RequestType = 0
+	LaunchRequest RequestType = iota
 	// CanFulfillIntentRequest represents a request made to skill to query whether the skill can understand and fulfill the intent request with detected slots, before actually asking the skill to take action.
-	CanFulfillIntentRequest RequestType = 1
+	CanFulfillIntentRequest
 	// SessionEndedRequest represents a request made to an Alexa skill to notify that a session was ended.
-	SessionEndedRequest RequestType = 2
+	SessionEndedRequest
 	// IntentRequest represents a request made to a skill based on what the user wants to do.
-	IntentRequest RequestType = 3
+	IntentRequest
 )
 
 // String returns request type as string.
 func (r RequestType) String() string {
-	types := [...]string{
+	return [...]string{
 		"LaunchRequest",
 		"CanFulfillIntentRequest",
 		"SessionEndedRequest",
 		"IntentRequest",
-	}
-
-	return types[r]
-}
-
-// IsLaunchRequest returns true when the intent type is LaunchRequest.
-func (r Request) IsLaunchRequest() bool {
-	if r.Type == LaunchRequest.String() {
-		return true
-	}
-
-	return false
-}
-
-// IsCanFulfillIntentRequest returns true when the intent type is CanFulfillIntentRequest.
-func (r Request) IsCanFulfillIntentRequest() bool {
-	if r.Type == CanFulfillIntentRequest.String() {
-		return true
-	}
-
-	return false
-}
-
-// IsSessionEndedRequest returns true when the inten type is SessionEndedRequest.
-func (r Request) IsSessionEndedRequest() bool {
-	if r.Type == SessionEndedRequest.String() {
-		return true
-	}
-
-	return false
-}
-
-// IsIntentRequest returns true when the inten type is IntentRequest.
-func (r Request) IsIntentRequest() bool {
-	if r.Type == IntentRequest.String() {
-		return true
-	}
-
-	return false
+	}[r]
 }
 
 // IntentType is a higher level enumeration for Amazon built in intent types and custom intent type.
@@ -184,44 +238,44 @@ type AmazonIntentType IntentType
 
 const (
 	// AmazonCancelIntent lets the user cancel a transaction or task or lets the user completely exit the skill.
-	AmazonCancelIntent AmazonIntentType = 0
+	AmazonCancelIntent AmazonIntentType = iota
 	// AmazonFallbackIntent provides a fallback for user utterances that do not match any of your skill's intents.
-	AmazonFallbackIntent AmazonIntentType = 1
+	AmazonFallbackIntent
 	// AmazonHelpIntent provides help about how to use the skill.
-	AmazonHelpIntent AmazonIntentType = 2
+	AmazonHelpIntent
 	// AmazonLoopOffIntent lets the user request that the skill turn off a loop or repeat mode, usually for audio skills that stream a playlist of tracks.
-	AmazonLoopOffIntent AmazonIntentType = 3
+	AmazonLoopOffIntent
 	// AmazonLoopOnIntent lets the user request that the skill turn on a loop or repeat mode, usually for audio skills that stream a playlist of tracks.
-	AmazonLoopOnIntent AmazonIntentType = 4
+	AmazonLoopOnIntent
 	// AmazonPauseIntent lets the user pause an action in progress, such as pausing a game or pausing an audio track that is playing.
-	AmazonPauseIntent AmazonIntentType = 5
+	AmazonPauseIntent
 	// AmazonPreviousIntent let the user go back to a previous item in a list.
-	AmazonPreviousIntent AmazonIntentType = 6
+	AmazonPreviousIntent
 	// AmazonNextIntent lets the user navigate to the next item in a list.
-	AmazonNextIntent AmazonIntentType = 7
+	AmazonNextIntent
 	// AmazonRepeatIntent lets the user request to repeat the last action.
-	AmazonRepeatIntent AmazonIntentType = 8
+	AmazonRepeatIntent
 	// AmazonResumeIntent lets the user resume or continue an action.
-	AmazonResumeIntent AmazonIntentType = 9
+	AmazonResumeIntent
 	// AmazonSelectIntent lets users indicate that they want to select a particular item, such as an item on a list.
-	AmazonSelectIntent AmazonIntentType = 10
+	AmazonSelectIntent
 	// AmazonShuffleOffIntent lets the user request that the skill turn of a shuffle mode, usually for audio skills that stream a playlist of tracks.
-	AmazonShuffleOffIntent AmazonIntentType = 11
+	AmazonShuffleOffIntent
 	// AmazonShuffleOnIntent lets the user request that the skill turn on a shuffle mode, usually for audio skills that stream a playlist of tracks.
-	AmazonShuffleOnIntent AmazonIntentType = 12
+	AmazonShuffleOnIntent
 	// AmazonStartOverIntent lets the user request to restart an action, such as restarting a game, transaction, or audio track.
-	AmazonStartOverIntent AmazonIntentType = 13
+	AmazonStartOverIntent
 	// AmazonStopIntent Either let the user stop an action (but remain in the skill) or lets the user completely exit the skill.
-	AmazonStopIntent AmazonIntentType = 14
+	AmazonStopIntent
 	// AmazonYesIntent lets the user provide a positive response to a yes/no question for confirmation.
-	AmazonYesIntent AmazonIntentType = 15
+	AmazonYesIntent
 	// AmazonNoIntent lets the user provide a negative response to a yes/no question for confirmation.
-	AmazonNoIntent AmazonIntentType = 16
+	AmazonNoIntent
 )
 
 // String returns intent type as string.
 func (a AmazonIntentType) String() string {
-	types := [...]string{
+	return [...]string{
 		"AMAZON.CancelIntent",
 		"AMAZON.FallbackIntent",
 		"AMAZON.HelpIntent",
@@ -239,7 +293,52 @@ func (a AmazonIntentType) String() string {
 		"AMAZON.StopIntent",
 		"AMAZON.YesIntent",
 		"AMAZON.NoIntent",
-	}
+	}[a]
+}
 
-	return types[a]
+// Locale represents the list of locales that Alexa supports
+type Locale int
+
+const (
+	// DeDe German (DE)
+	DeDe Locale = iota
+	// EnAu English (AU)
+	EnAu
+	// EnCa English (CA)
+	EnCa
+	// EnGb English (UK)
+	EnGb
+	// EnIn English (IN)
+	EnIn
+	// EnUs English (US)
+	EnUs
+	// EsEs Spanish (ES)
+	EsEs
+	// EsMx Spanish (MX)
+	EsMx
+	// FrCa French (CA)
+	FrCa
+	// FrFr French (FR)
+	FrFr
+	// ItIt Italian (IT)
+	ItIt
+	// JaJp Japanese (JP)
+	JaJp
+)
+
+func (l Locale) String() string {
+	return [...]string{
+		"de-DE",
+		"en-AU",
+		"en-CA",
+		"en-GB",
+		"en-IN",
+		"en-US",
+		"es-ES",
+		"es-MX",
+		"fr-CA",
+		"fr-FR",
+		"it-IT",
+		"ja-JP",
+	}[l]
 }
