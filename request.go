@@ -32,7 +32,7 @@ type Context struct {
 // Viewport describes the operating characteristics of the display device.
 type Viewport struct {
 	Experiences        []Experience `json:"experiences"`
-	Shape              string       `json:"shape"`              // Shape of the viewport.	RECTANGLE or ROUND.
+	Shape              string       `json:"shape"`              // shape of the viewport. RECTANGLE or ROUND.
 	PixelWidth         int          `json:"pixelWidth"`         // maximum viewport value
 	PixelHeight        int          `json:"pixelHeight"`        // maximum viewport value
 	DPI                int          `json:"dpi"`                // Pixel density of the viewport
@@ -50,10 +50,13 @@ type Experience struct {
 	CanResize       bool `json:"canResize"`
 }
 
+// ShapeType is the shape of the viewport. RECTANGLE or ROUND.
 type ShapeType int
 
 const (
+	// Rectangle for device with rectangular viewport
 	Rectangle ShapeType = iota
+	// Round is for device with round viewport
 	Round
 )
 
