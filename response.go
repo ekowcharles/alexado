@@ -10,6 +10,11 @@ type AlexaResponse struct {
 	Response          Response    `json:"response,omitempty"`          // Defines what to render to the user and whether to end the current session
 }
 
+type Attributes struct {
+	Key   string `json:"key,omitempty"`
+	Value string `json:"value,omitempty"`
+}
+
 // Response defines what to render to the user and whether to end the current session
 type Response struct {
 	OutputSpeech     *OutputSpeech `json:"outputSpeech,omitempty"`     // Contains the type of output speech to render
