@@ -192,7 +192,7 @@ Add some more tests for enumerations
 
 ## Contribution
 
-Feel free to make a pull request. For bigger changes, create a issue first to discuss it.
+Feel free to make a pull request. For bigger changes, create a issue first to discuss it. Be sure to add links to any useful references.
 
 # License
 
