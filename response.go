@@ -5,26 +5,26 @@ import "encoding/json"
 
 // AlexaResponse is the response to be sent to the Alexa platform
 type AlexaResponse struct {
-	Version           string      `json:"version,omitempty"`           // version specifier for the response with the value to be defined as: "1.0"
-	SessionAttributes *Attributes `json:"sessionAttributes,omitempty"` // map of key-value pairs to persist in the session
-	Response          Response    `json:"response,omitempty"`          // defines what to render to the user and whether to end the current session
+	Version           string      `json:"version,omitempty"`           // Version specifier for the response with the value to be defined as: "1.0"
+	SessionAttributes *Attributes `json:"sessionAttributes,omitempty"` // Map of key-value pairs to persist in the session
+	Response          Response    `json:"response,omitempty"`          // Defines what to render to the user and whether to end the current session
 }
 
 // Response defines what to render to the user and whether to end the current session
 type Response struct {
-	OutputSpeech     *OutputSpeech `json:"outputSpeech,omitempty"`     // contains the type of output speech to render
-	Card             *Card         `json:"card,omitempty"`             // contains a card to render to the Amazon Alexa App
-	Reprompt         *Reprompt     `json:"reprompt,omitempty"`         // contains the outputSpeech to use if a re-prompt is necessary
-	Directives       []Directive   `json:"directives,omitempty"`       // specifies device-level actions to take using a particular interface, such as the AudioPlayer interface for streaming audio
-	ShouldEndSession bool          `json:"shouldEndSession,omitempty"` // true meaning that the session should end after Alexa speaks the response, or false if the session should remain active. If not provided, defaults to true.
+	OutputSpeech     *OutputSpeech `json:"outputSpeech,omitempty"`     // Contains the type of output speech to render
+	Card             *Card         `json:"card,omitempty"`             // Contains a card to render to the Amazon Alexa App
+	Reprompt         *Reprompt     `json:"reprompt,omitempty"`         // Contains the outputSpeech to use if a re-prompt is necessary
+	Directives       []Directive   `json:"directives,omitempty"`       // Specifies device-level actions to take using a particular interface, such as the AudioPlayer interface for streaming audio
+	ShouldEndSession bool          `json:"shouldEndSession,omitempty"` // True meaning that the session should end after Alexa speaks the response, or false if the session should remain active. If not provided, defaults to true.
 }
 
 // OutputSpeech is used for setting both the outputSpeech and the reprompt properties
 type OutputSpeech struct {
-	Type         string `json:"type,omitempty"`         // contains the type of output speech to render
-	Text         string `json:"text,omitempty"`         // contains the speech to render to the user
-	SSML         string `json:"ssml,omitempty"`         // containing text marked up with SSML to render to the user. Use this when type is  "SSML"
-	PlayBehavior string `json:"playBehavior,omitempty"` // determines the queuing and playback of this output speech
+	Type         string `json:"type,omitempty"`         // Contains the type of output speech to render
+	Text         string `json:"text,omitempty"`         // Contains the speech to render to the user
+	SSML         string `json:"ssml,omitempty"`         // Contains text marked up with SSML to render to the user. Use this when type is  "SSML"
+	PlayBehavior string `json:"playBehavior,omitempty"` // Determines the queuing and playback of this output speech
 }
 
 // OutputSpeechType is the type of output speech to render
@@ -66,10 +66,10 @@ func (p PlayBehaviorType) String() string {
 
 // Card can only be included when sending a response to a CanFulfillIntentRequest, LaunchRequest, IntentRequest, or InputHandlerEvent
 type Card struct {
-	Type  string `json:"type,omitempty"`  // describes the type of card to render
-	Title string `json:"title,omitempty"` // contains the title of the card. (not applicable for cards of type LinkAccount).
-	Text  string `json:"text,omitempty"`  // contains the text content for a Standard card (not applicable for cards of type Simple or LinkAccount)
-	Image *Image `json:"image,omitempty"` // specifies the URLs for the image to display on a Standard card. Only applicable for Standard cards.
+	Type  string `json:"type,omitempty"`  // Describes the type of card to render
+	Title string `json:"title,omitempty"` // Contains the title of the card. (not applicable for cards of type LinkAccount).
+	Text  string `json:"text,omitempty"`  // Contains the text content for a Standard card (not applicable for cards of type Simple or LinkAccount)
+	Image *Image `json:"image,omitempty"` // Specifies the URLs for the image to display on a Standard card. Only applicable for Standard cards.
 }
 
 // CardType describes the type of card to render
@@ -97,8 +97,8 @@ func (c CardType) String() string {
 
 // Image specifies the URLs for the image to display on a Standard card. Only applicable for Standard cards.
 type Image struct {
-	SmallImageURL string `json:"smallImageUrl,omitempty"` // displayed on smaller screens
-	LargeImageURL string `json:"largeImageUrl,omitempty"` // displayed on larger screens
+	SmallImageURL string `json:"smallImageUrl,omitempty"` // Displayed on smaller screens
+	LargeImageURL string `json:"largeImageUrl,omitempty"` // Displayed on larger screens
 }
 
 // Reprompt contains the outputSpeech to use if a re-prompt is necessary

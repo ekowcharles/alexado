@@ -53,6 +53,40 @@ func TestThemeTypeString(t *testing.T) {
 	}
 }
 
+func TestPlayerActivityTypeString(t *testing.T) {
+	var actual, expected string
+
+	actual, expected = Idle.String(), "IDLE"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = Paused.String(), "PAUSED"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = Playing.String(), "PLAYING"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = BufferUnderrun.String(), "BUFFER_UNDERRUN"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = Finished.String(), "FINISHED"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = Stopped.String(), "STOPPED"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+}
+
 func TestConfirmationStatusTypeString(t *testing.T) {
 	var actual, expected string
 
