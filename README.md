@@ -68,7 +68,7 @@ alexaRequest.Request.Intent.Slots["speech"].Source             // 'USER'
 ```
 
 Expect the following results for non-existent slots, (using 'missing' in this example)
-``go
+```go
 alexaRequest.Request.Intent.Slots["missing"]                    // '{   }', essentially an empty map
 alexaRequest.Request.Intent.Slots["missing"].Name               // '', empty string
 alexaRequest.Request.Intent.Slots["missing"].Value              // ''
