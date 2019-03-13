@@ -6,11 +6,13 @@
 [![GoDoc](https://godoc.org/github.com/ekowcharles/alexado?status.svg)](https://godoc.org/github.com/ekowcharles/alexado)
 
 
-Go library that provides objects and basic behavior for the sending requests to and processing responses for the Alexa platform.
+Go library for serializing and deserializing Alexa platform objects.
 
 ## Usage
 
 ### Requests
+
+#### Retrieving Alexa request data
 
 The following snippet show how to use this library to process request received from the Alexa platform:
 ```go
@@ -27,6 +29,8 @@ if err != nil {
 
 // at this point 'areq' has everything you need to access data in the Alexa request
 ```
+
+#### Accessing slots
 
 The data in the request received from Amazon has dynamic content for the `slots` json node when it does include it. 
 
@@ -76,9 +80,33 @@ alexaRequest.Request.Intent.Slots["missing"].ConfirmationStatus // ''
 alexaRequest.Request.Intent.Slots["missing"].Source             // ''
 ```
 
-Alexa uses the [RFC3339](https://tools.ietf.org/html/rfc3339) format for dates. Timestamps are automatically converted to this format in alexado for us in referencing apps.
+#### Handling time
+
+Alexa uses the [RFC3339](https://tools.ietf.org/html/rfc3339) format for dates. Timestamps are automatically converted to this format in alexado for use.
+
+#### Accessing request attributes
+
+Given you receive the following in your request:
+```json
+...
+"attributes" : {
+  "context" : "update",
+  "object" : "note",
+  "id": "2690e1db-993f-4f29-a411-ad486a98d9e9"
+}
+...
+```
+
+You can retrieve the attributes like so:
+```go
+alexaRequest.Session.Attributes["context"]  // 'update'
+alexaRequest.Session.Attributes["object"]   // 'note'
+alexaRequest.Session.Attributes["id"]       // '2690e1db-993f-4f29-a411-ad486a98d9e9'
+```
 
 ### Responses
+
+#### Creating response object
 
 The following demonstrates how you would use the alexado library to construct a response to be sent to the Alexa platform:
 ```go
@@ -100,6 +128,19 @@ if err != nil {
 w.WriteHeader(http.StatusOK)                        // is an http.ResponseWriter object
 w.Header().Add("ContentType", "application/json")
 io.WriteString(w, responseBody)                     // io is from the io/ioutil package
+```
+#### Setting session attributes
+
+You can set the session attributes like so:
+```go
+ares := alexado.AlexaResponse{}
+...
+var s Attributes = make(map[string]string)
+s["context"] = "update"
+s["object"] = "note"
+s["id"] = "2690e1db-993f-4f29-a411-ad486a98d9e9"
+ares.SessionAttributes = s
+...
 ```
 
 ## Samples

@@ -60,16 +60,19 @@ func TestCardTypeString(t *testing.T) {
 }
 
 func TestToJSON(t *testing.T) {
-	sa := Attributes{Key: "foo", Value: "bar"}
+	var a Attributes = make(map[string]string)
+	a["context"] = "create"
+	a["object"] = "note"
+
 	osp := OutputSpeech{Type: SSML.String(), SSML: "Some good speech."}
 	res := Response{OutputSpeech: &osp}
-	req := AlexaResponse{Version: "1.0", Response: res, SessionAttributes: &sa}
+	req := AlexaResponse{Version: "1.0", Response: res, SessionAttributes: a}
 
-	j, _ := req.ToJSON()
+	actual, _ := req.ToJSON()
 
-	e := string(`{"version":"1.0","sessionAttributes":{"key":"foo","value":"bar"},"response":{"outputSpeech":{"type":"SSML","ssml":"Some good speech."}}}`)
+	expectd := string(`{"version":"1.0","sessionAttributes":{"context":"create","object":"note"},"response":{"outputSpeech":{"type":"SSML","ssml":"Some good speech."}}}`)
 
-	if j != e {
-		t.Errorf("JSON %s was not constructed properly.", j)
+	if actual != expectd {
+		t.Errorf("JSON %s was not constructed properly.", actual)
 	}
 }
