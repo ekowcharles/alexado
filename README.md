@@ -76,6 +76,8 @@ alexaRequest.Request.Intent.Slots["missing"].ConfirmationStatus // ''
 alexaRequest.Request.Intent.Slots["missing"].Source             // ''
 ```
 
+Alexa uses the RFC3339 format for dates. Timestamps are automatically converted to this format in alexado for us in referencing apps.
+
 ### Responses
 
 The following demonstrates how you would use the alexado library to construct a response to be sent to the Alexa platform:
