@@ -67,6 +67,15 @@ alexaRequest.Request.Intent.Slots["speech"].ConfirmationStatus // 'CONFIRMED'
 alexaRequest.Request.Intent.Slots["speech"].Source             // 'USER'
 ```
 
+Expect the following results for non-existent slots, (using 'missing' in this example)
+``go
+alexaRequest.Request.Intent.Slots["missing"]                    // '{   }', essentially an empty map
+alexaRequest.Request.Intent.Slots["missing"].Name               // '', empty string
+alexaRequest.Request.Intent.Slots["missing"].Value              // ''
+alexaRequest.Request.Intent.Slots["missing"].ConfirmationStatus // ''
+alexaRequest.Request.Intent.Slots["missing"].Source             // ''
+```
+
 ### Responses
 
 The following demonstrates how you would use the alexado library to construct a response to be sent to the Alexa platform:
