@@ -14,18 +14,18 @@ Go library that provides objects and basic behavior for the sending requests to 
 
 The following snippet show how to use this library to process request received from the Alexa platform:
 ```go
-b, err := ioutil.ReadAll(r.Body) // 'r' is a pointer to http.Request
+b, err := ioutil.ReadAll(r.Body)  // 'r' is a pointer to http.Request
 if err != nil {
-  ... // handle error
+  ...                             // handle error
 }
 
 areq := AlexaRequest{}
 err = json.Unmarshal(b, &alexaRequest)
 if err != nil {
-  ... // handle error
+  ...                            // handle error
 }
 
-// at this point 'areq' should have everything you need to access data in the Alexa request
+// at this point 'areq' has everything you need to access data in the Alexa request
 ```
 
 The data in the request received from Amazon has dynamic content for the `slots` json node when it does include it. 
@@ -61,16 +61,16 @@ alexaRequest.Request.Intent.Slots["day"].Value                 // 'Friday'
 alexaRequest.Request.Intent.Slots["day"].ConfirmationStatus    // 'CONFIRMED'
 alexaRequest.Request.Intent.Slots["day"].Source                // 'USER'
 
-alexaRequest.Request.Intent.Slots["note"].Name               // 'note'
-alexaRequest.Request.Intent.Slots["note"].Value              // 'It may actually rain'
-alexaRequest.Request.Intent.Slots["note"].ConfirmationStatus // 'CONFIRMED'
-alexaRequest.Request.Intent.Slots["note"].Source             // 'USER'
+alexaRequest.Request.Intent.Slots["note"].Name                 // 'note'
+alexaRequest.Request.Intent.Slots["note"].Value                // 'It may actually rain'
+alexaRequest.Request.Intent.Slots["note"].ConfirmationStatus   // 'CONFIRMED'
+alexaRequest.Request.Intent.Slots["note"].Source               // 'USER'
 ```
 
 Expect the following results for non-existent slots, (using 'missing' in this example)
 ```go
-alexaRequest.Request.Intent.Slots["missing"]                    // '{   }', essentially an empty map
-alexaRequest.Request.Intent.Slots["missing"].Name               // '', empty string
+alexaRequest.Request.Intent.Slots["missing"]                    // '{   }', essentially zero value for a map
+alexaRequest.Request.Intent.Slots["missing"].Name               // '', zero valu for a string
 alexaRequest.Request.Intent.Slots["missing"].Value              // ''
 alexaRequest.Request.Intent.Slots["missing"].ConfirmationStatus // ''
 alexaRequest.Request.Intent.Slots["missing"].Source             // ''
@@ -94,12 +94,12 @@ ares.Response.ShouldEndSession = true
 
 responseBody, err = ares.ToJSON()
 if err != nil {
-  ... // handle serialization error
+  ...                                               // handle serialization error
 }
 
-w.WriteHeader(http.StatusOK) // is an http.ResponseWriter object
+w.WriteHeader(http.StatusOK)                        // is an http.ResponseWriter object
 w.Header().Add("ContentType", "application/json")
-io.WriteString(w, responseBody) // io is from the io/ioutil package
+io.WriteString(w, responseBody)                     // io is from the io/ioutil package
 ```
 
 ## Samples
