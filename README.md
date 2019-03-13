@@ -10,6 +10,8 @@ Go library that provides objects and basic behavior for the sending requests to 
 
 ## Usage
 
+### Requests
+
 The following snippet show how to use this library to process request received from the Alexa platform:
 ```go
 b, err := ioutil.ReadAll(r.Body) // 'r' is a pointer to http.Request
@@ -25,6 +27,47 @@ if err != nil {
 
 // at this point 'areq' should have everything you need to access data in the Alexa request
 ```
+
+The data in the request received from Amazon has dynamic content for the `slots` json node when it does include it. 
+
+For example, given you receive the following request from the Alexa platform:
+```json
+  ...
+  "intent": {
+    "name": "DiaryCreationIntent",
+    "confirmationStatus": "NONE",
+    "slots": {
+      "day": {
+        "name": "day",
+        "value": "Friday",
+        "confirmationStatus": "CONFIRMED",
+        "source": "USER"
+      },
+      "speech": {
+        "name": "speech",
+        "value": "It may actually rain",
+        "confirmationStatus": "CONFIRMED",
+        "source": "USER"
+      }
+    }
+  }
+  ...
+```
+
+You can extract the slots like so:
+```go
+alexaRequest.Request.Intent.Slots["day"].Name                  // 'day'
+alexaRequest.Request.Intent.Slots["day"].Value                 // 'Friday'
+alexaRequest.Request.Intent.Slots["day"].ConfirmationStatus    // 'CONFIRMED'
+alexaRequest.Request.Intent.Slots["day"].Source                // 'USER'
+
+alexaRequest.Request.Intent.Slots["speech"].Name               // 'speech'
+alexaRequest.Request.Intent.Slots["speech"].Value              // 'It may actually rain'
+alexaRequest.Request.Intent.Slots["speech"].ConfirmationStatus // 'CONFIRMED'
+alexaRequest.Request.Intent.Slots["speech"].Source             // 'USER'
+```
+
+### Responses
 
 The following demonstrates how you would use the alexado library to construct a response to be sent to the Alexa platform:
 ```go
@@ -107,14 +150,14 @@ io.WriteString(w, responseBody) // io is from the io/ioutil package
     "intent": {
       "name": "RecordIntent",
       "confirmationStatus": "NONE",
-      "slots": [
-        {
+      "slots": {
+        "speech": {
           "name": "speech",
           "value": "Alexa-do's got you covered!",
           "confirmationStatus": "NONE",
           "source": "USER"
         }
-      ]
+      }
     }
   }
 }

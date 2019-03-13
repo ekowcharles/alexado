@@ -194,9 +194,9 @@ type Request struct {
 
 // Intent represents what user wants.
 type Intent struct {
-	Name               string      `json:"name"`
-	ConfirmationStatus string      `json:"confirmationStatus"`
-	Slots              interface{} `json:"slots"`
+	Name               string          `json:"name"`
+	ConfirmationStatus string          `json:"confirmationStatus"`
+	Slots              map[string]Slot `json:"slots"`
 }
 
 // Slot represents user defined variables

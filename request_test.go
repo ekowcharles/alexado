@@ -464,4 +464,26 @@ func TestRequestUnmarshallsCorrectly(t *testing.T) {
 	if actual != expected {
 		t.Errorf("'%s' != '%s'", actual, expected)
 	}
+
+	speechSlot := intent.Slots["speech"]
+
+	actual, expected = speechSlot.Name, "speech"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = speechSlot.Value, "Aint this something?"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = speechSlot.ConfirmationStatus, "NONE"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
+
+	actual, expected = speechSlot.Source, "USER"
+	if actual != expected {
+		t.Errorf("'%s' != '%s'", actual, expected)
+	}
 }
