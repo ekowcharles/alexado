@@ -6,7 +6,7 @@
 [![GoDoc](https://godoc.org/github.com/ekowcharles/alexado?status.svg)](https://godoc.org/github.com/ekowcharles/alexado)
 
 
-Go library that provides objects and basic behavior for the sending requests to and processing responses for Alexa.
+Go library that provides objects and basic behavior for the sending requests to and processing responses for the Alexa platform.
 
 ## Usage
 
