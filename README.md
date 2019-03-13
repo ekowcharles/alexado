@@ -34,7 +34,7 @@ For example, given you receive the following request from the Alexa platform:
 ```json
   ...
   "intent": {
-    "name": "DiaryCreationIntent",
+    "name": "NoteCreationIntent",
     "confirmationStatus": "NONE",
     "slots": {
       "day": {
@@ -44,7 +44,7 @@ For example, given you receive the following request from the Alexa platform:
         "source": "USER"
       },
       "speech": {
-        "name": "speech",
+        "name": "note",
         "value": "It may actually rain",
         "confirmationStatus": "CONFIRMED",
         "source": "USER"
@@ -61,10 +61,10 @@ alexaRequest.Request.Intent.Slots["day"].Value                 // 'Friday'
 alexaRequest.Request.Intent.Slots["day"].ConfirmationStatus    // 'CONFIRMED'
 alexaRequest.Request.Intent.Slots["day"].Source                // 'USER'
 
-alexaRequest.Request.Intent.Slots["speech"].Name               // 'speech'
-alexaRequest.Request.Intent.Slots["speech"].Value              // 'It may actually rain'
-alexaRequest.Request.Intent.Slots["speech"].ConfirmationStatus // 'CONFIRMED'
-alexaRequest.Request.Intent.Slots["speech"].Source             // 'USER'
+alexaRequest.Request.Intent.Slots["note"].Name               // 'note'
+alexaRequest.Request.Intent.Slots["note"].Value              // 'It may actually rain'
+alexaRequest.Request.Intent.Slots["note"].ConfirmationStatus // 'CONFIRMED'
+alexaRequest.Request.Intent.Slots["note"].Source             // 'USER'
 ```
 
 Expect the following results for non-existent slots, (using 'missing' in this example)
@@ -76,7 +76,7 @@ alexaRequest.Request.Intent.Slots["missing"].ConfirmationStatus // ''
 alexaRequest.Request.Intent.Slots["missing"].Source             // ''
 ```
 
-Alexa uses the RFC3339 format for dates. Timestamps are automatically converted to this format in alexado for us in referencing apps.
+Alexa uses the [RFC3339](https://tools.ietf.org/html/rfc3339) format for dates. Timestamps are automatically converted to this format in alexado for us in referencing apps.
 
 ### Responses
 

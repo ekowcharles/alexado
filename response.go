@@ -5,9 +5,9 @@ import "encoding/json"
 
 // AlexaResponse is the response to be sent to the Alexa platform
 type AlexaResponse struct {
-	Version           string      `json:"version,omitempty"`           // Version specifier for the response with the value to be defined as: "1.0"
-	SessionAttributes *Attributes `json:"sessionAttributes,omitempty"` // Map of key-value pairs to persist in the session
-	Response          Response    `json:"response,omitempty"`          // Defines what to render to the user and whether to end the current session
+	Version           string                 `json:"version,omitempty"`           // Version specifier for the response with the value to be defined as: "1.0"
+	SessionAttributes *map[Attributes]string `json:"sessionAttributes,omitempty"` // Map of key-value pairs to persist in the session
+	Response          Response               `json:"response,omitempty"`          // Defines what to render to the user and whether to end the current session
 }
 
 type Attributes struct {
