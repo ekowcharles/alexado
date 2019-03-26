@@ -185,11 +185,12 @@ type Permissions struct {
 
 // Request provides the details of the user's request. There are several different request types available.
 type Request struct {
-	RequestID string    `json:"requestId"`
-	Timestamp time.Time `json:"timestamp"`
-	Locale    string    `json:"locale"`
-	Intent    Intent    `json:"intent"`
-	Type      string    `json:"type"`
+	RequestID                  string    `json:"requestId"`
+	Timestamp                  time.Time `json:"timestamp"`
+	Locale                     string    `json:"locale"`
+	Intent                     Intent    `json:"intent"`
+	Type                       string    `json:"type"`
+	ShouldLinkResultBeReturned bool      `json:"shouldLinkResultBeReturned"`
 }
 
 // Intent represents what user wants.
