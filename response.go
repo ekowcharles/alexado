@@ -69,10 +69,11 @@ func (p PlayBehaviorType) String() string {
 
 // Card can only be included when sending a response to a CanFulfillIntentRequest, LaunchRequest, IntentRequest, or InputHandlerEvent
 type Card struct {
-	Type  string `json:"type,omitempty"`  // Describes the type of card to render
-	Title string `json:"title,omitempty"` // Contains the title of the card. (not applicable for cards of type LinkAccount).
-	Text  string `json:"text,omitempty"`  // Contains the text content for a Standard card (not applicable for cards of type Simple or LinkAccount)
-	Image *Image `json:"image,omitempty"` // Specifies the URLs for the image to display on a Standard card. Only applicable for Standard cards.
+	Type    string `json:"type,omitempty"`    // Describes the type of card to render
+	Title   string `json:"title,omitempty"`   // Contains the title of the card. (not applicable for cards of type LinkAccount).
+	Text    string `json:"text,omitempty"`    // Contains the text content for a Standard card (not applicable for cards of type Simple or LinkAccount)
+	Content string `json:"content,omitempty"` // Contains the text content for a Standard card (not applicable for cards of type Simple or LinkAccount)
+	Image   *Image `json:"image,omitempty"`   // Specifies the URLs for the image to display on a Standard card. Only applicable for Standard cards.
 }
 
 // CardType describes the type of card to render
