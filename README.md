@@ -74,7 +74,7 @@ alexaRequest.Request.Intent.Slots["note"].Source               // 'USER'
 Expect the following results for non-existent slots, (using 'missing' in this example)
 ```go
 alexaRequest.Request.Intent.Slots["missing"]                    // '{   }', essentially zero value for a map
-alexaRequest.Request.Intent.Slots["missing"].Name               // '', zero valu for a string
+alexaRequest.Request.Intent.Slots["missing"].Name               // '', zero value for a string
 alexaRequest.Request.Intent.Slots["missing"].Value              // ''
 alexaRequest.Request.Intent.Slots["missing"].ConfirmationStatus // ''
 alexaRequest.Request.Intent.Slots["missing"].Source             // ''
